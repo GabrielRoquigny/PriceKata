@@ -5,7 +5,7 @@ import kata.price.Item;
 import java.util.Collection;
 
 /**
- * The tariff condition.
+ * The tariff condition, is apply for each or for group of item into cart.
  */
 public interface TariffCondition {
 

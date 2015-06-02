@@ -12,6 +12,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 
+/**
+ * Test the class
+ * {@link kata.price.tariffCondition.XForPriceOfXTest XForPriceOfXTest}.
+ */
 public class XForPriceOfXTest {
     @Test
     public void getOneItemFromThreeSame() {

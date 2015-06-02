@@ -1,6 +1,8 @@
 package kata.price;
 
+import kata.price.discount.Discount;
 import kata.price.tariffCondition.TariffCondition;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -85,7 +87,7 @@ public class Cart {
 
 
     /**
-     * Add an tariff condition.
+     * Add a tariff condition.
      *
      * @param tariffCondition tariff condition to add.
      */
@@ -97,8 +99,18 @@ public class Cart {
      * Get the tariff conditions.
      *
      * @return the tariff conditions.
+     * TODO to delete is only for test :(
      */
-    public Collection<TariffCondition> getTariffConditions() {
+    protected Collection<TariffCondition> getTariffConditions() {
         return unmodifiableCollection(tariffConditions);
+    }
+
+    /**
+     * Add a discount.
+     *
+     * @param discount tariff condition to add.
+     */
+    public void add(Discount discount) {
+        throw new NotImplementedException();
     }
 }
