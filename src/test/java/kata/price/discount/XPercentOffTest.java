@@ -11,9 +11,9 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
- * Test the class {@link kata.price.discount.XPrecentOffTest XPrecentOffTest}.
+ * Test the class {@link kata.price.discount.XPercentOff XPrecentOff}.
  */
-public class XPrecentOffTest {
+public class XPercentOffTest {
     @Test
     public void getPercentOnAllItem() {
         Item item1 = new Item("Item 1", valueOf(2.5));

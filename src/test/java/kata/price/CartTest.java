@@ -21,7 +21,7 @@ public class CartTest {
     @Test
     public void createNewCartAndGetNoItem() {
         Cart cart = new Cart();
-        assertThat("The cart need to be empty when is created", cart.getItems(), emptyCollectionOf(Item.class));
+        assertThat("The cart need to be empty when is created", cart.getChargedItems(), emptyCollectionOf(Item.class));
     }
 
     @Test
@@ -32,7 +32,7 @@ public class CartTest {
         cart.add(item1);
         cart.add(item2);
 
-        assertThat("Get the item put into the cart", cart.getItems(), containsInAnyOrder(item1, item2));
+        assertThat("Get the item put into the cart", cart.getChargedItems(), containsInAnyOrder(item1, item2));
     }
 
     @Test
@@ -43,7 +43,7 @@ public class CartTest {
         cart.add(item);
         cart.add(item);
 
-        assertThat("Get two time the item put twice into the cart", cart.getItems(), containsInAnyOrder(item, item));
+        assertThat("Get two time the item put twice into the cart", cart.getChargedItems(), containsInAnyOrder(item, item));
     }
 
     @Test
@@ -54,7 +54,7 @@ public class CartTest {
         cart.add(item2);
         cart.add(item1);
 
-        assertThat("Get the item put into the cart by alphabetic order", cart.getItems(ALPHABETIC), contains(item1, item2));
+        assertThat("Get the item put into the cart by alphabetic order", cart.getChargedItems(ALPHABETIC), contains(item1, item2));
     }
 
     @Test
@@ -65,7 +65,7 @@ public class CartTest {
         cart.add(item2);
         cart.add(item1);
 
-        assertThat("Get the item put into the cart by price order", cart.getItems(INITIAL_PRICE), contains(item1, item2));
+        assertThat("Get the item put into the cart by price order", cart.getChargedItems(INITIAL_PRICE), contains(item1, item2));
     }
 
     @Test
@@ -114,6 +114,27 @@ public class CartTest {
         assertThat("Get price with 10% off", cart.totalPrice(), equalTo(valueOf(2.7)));
     }
 
+    @Test
+    public void totalPriceIsAllTimeUpdated() {
+        Cart cart = new Cart();
+        Item item = newItem("Item", ONE);
+        cart.add(item);
+        cart.add(item);
+        cart.add(item);
+
+        assertThat("Get price with 10% off", cart.totalPrice(), equalTo(valueOf(3)));
+
+        Discount discount = new XPercentOff(10);
+        cart.add(discount);
+        assertThat("Get price with 10% off", cart.totalPrice(), equalTo(valueOf(2.7)));
+
+        cart.add(item);
+        assertThat("Get price with 10% off", cart.totalPrice(), equalTo(valueOf(3.6)));
+
+        TariffCondition tariffCondition1 = getInstance();
+        cart.add(tariffCondition1);
+        assertThat("Get price with 10% off", cart.totalPrice(), equalTo(valueOf(2.7)));
+    }
 
     private Item newItem(String item) {
         return newItem(item, ZERO);
