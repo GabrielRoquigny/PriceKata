@@ -1,5 +1,7 @@
 package kata.price;
 
+import kata.price.discount.Discount;
+import kata.price.discount.XPercentOff;
 import kata.price.tariffCondition.TariffCondition;
 import kata.price.tariffCondition.XForPriceOfX;
 import org.testng.annotations.Test;
@@ -85,17 +87,6 @@ public class CartTest {
     }
 
     @Test
-    public void createNewCartAddTariffConditionsAndGetThen() {
-        Cart cart = new Cart();
-        TariffCondition tariffCondition1 = getInstance(), tariffCondition2 = getInstance();
-
-        cart.add(tariffCondition1);
-        cart.add(tariffCondition2);
-
-        assertThat("Get the tariff condition put into the cart", cart.getTariffConditions(), containsInAnyOrder(tariffCondition1, tariffCondition2));
-    }
-
-    @Test
     public void cartApplyTheTariffConditionThreeForTwo() {
         Cart cart = new Cart();
         TariffCondition tariffCondition1 = getInstance();
@@ -107,6 +98,20 @@ public class CartTest {
         Item itemCharged = newItem("3 x Item", valueOf(2));
 
         assertThat("Get charged item with a tariff condition", cart.getChargedItems(), contains(itemCharged));
+    }
+
+    @Test
+    public void cartApply10PercentOff() {
+        Cart cart = new Cart();
+        Discount discount = new XPercentOff(10);
+        cart.add(discount);
+        Item item = newItem("Item", ONE);
+        cart.add(item);
+        cart.add(item);
+        cart.add(item);
+
+        assertThat("Get all item into cart", cart.getChargedItems(), contains(item, item, item));
+        assertThat("Get price with 10% off", cart.totalPrice(), equalTo(valueOf(2.7)));
     }
 
 
