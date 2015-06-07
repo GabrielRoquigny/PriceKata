@@ -31,6 +31,6 @@ public class Cart {
         return items.entrySet()
                 .stream()
                 .map((e) -> e.getKey().getPrice().multiply(valueOf(e.getValue())))
-                .reduce(ZERO, (a, b) -> a.add(b));
+                .reduce(ZERO, BigDecimal::add);
     }
 }
