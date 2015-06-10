@@ -53,7 +53,9 @@ public class Cart {
                     format("Item %s cannot have negative quantity",
                             item.toString()));
         }
-        items.put(item, nbItem);
+        if (!nbItem.equals(ZERO)) {
+            items.put(item, nbItem);
+        }
         resetCartLines();
     }
 
