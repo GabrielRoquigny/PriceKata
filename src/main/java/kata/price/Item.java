@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 @EqualsAndHashCode
 public class Item {
     @NonNull
-    private String name;
+    private final String name;
     @NonNull
-    private BigDecimal price;
+    private final BigDecimal price;
 }
