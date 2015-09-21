@@ -9,6 +9,9 @@ import static java.math.BigDecimal.valueOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+/**
+ * Test {@link kata.price.Cart cart} class.
+ */
 public class CartTest {
     @Test(expectedExceptions = IllegalArgumentException.class,
             expectedExceptionsMessageRegExp = "^Item .* cannot have negative quantity$")

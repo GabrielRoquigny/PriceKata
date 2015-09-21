@@ -2,16 +2,15 @@ package kata.price;
 
 import javax.annotation.Nonnull;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import static java.lang.String.format;
 import static java.math.BigDecimal.ONE;
 import static java.math.BigDecimal.ZERO;
 import static java.util.Collections.unmodifiableCollection;
+import static java.util.stream.Collectors.toList;
 
 /**
  * Represent a cart.
@@ -44,7 +43,6 @@ public class Cart {
         BigDecimal nbItem = items.remove(item);
         if (null == nbItem) {
             nbItem = nb;
-
         } else {
             nbItem = nbItem.add(nb);
         }
@@ -71,13 +69,12 @@ public class Cart {
 
     private Collection<CartLine> getCartLines() {
         if (null == cartLines) {
-            cartLines = new ArrayList<>();
-            for (Entry<Item, BigDecimal> itemEntry : items.entrySet()) {
-                Item item = itemEntry.getKey();
-                cartLines.add(
-                        new CartLine(item, item.getName(), item.getPrice(),
-                                itemEntry.getValue()));
-            }
+            cartLines = items.entrySet()
+                             .stream()
+                             .map((e) -> new CartLine(e.getKey(),
+                                     e.getKey().getName(),
+                                     e.getKey().getPrice(), e.getValue()))
+                             .collect(toList());
         }
         return unmodifiableCollection(cartLines);
     }

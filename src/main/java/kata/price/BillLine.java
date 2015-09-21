@@ -7,12 +7,11 @@ import lombok.NonNull;
 import java.math.BigDecimal;
 
 /**
- * Represent a {@link kata.price.Cart cart} line.
+ * Represent a line of {@link kata.price.Bill bill}.
  */
 @Data
 @AllArgsConstructor
-public class CartLine {
-    private final Item item;
+public class BillLine {
     @NonNull
     private final String description;
     @NonNull
@@ -20,4 +19,7 @@ public class CartLine {
     @NonNull
     private final BigDecimal nb;
 
+    public BigDecimal total() {
+        return price.multiply(nb);
+    }
 }
