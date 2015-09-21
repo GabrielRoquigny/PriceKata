@@ -64,6 +64,9 @@ Our suggestions for doing the kata are :
 There are no right or wrong answers in these kata : the benefit comes from the
 process, not from the result.
 
+## Exemple
+
+Some exemples are on branch on this repository.
 
 
 Original text by [Dave Thomas](http://pragdave.me/ "his website").
